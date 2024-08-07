@@ -32,3 +32,29 @@ function type() {
 }
 
 type();
+
+
+function incrementNumber(elementId, start, end, duration) {
+    let element = document.getElementById(elementId);
+    let current = start;
+    let increment = (end - start) / (duration / 100);
+
+    function updateNumber() {
+        current += increment;
+        element.textContent = Math.floor(current);
+
+        if (current < end) {
+            requestAnimationFrame(updateNumber);
+        } else {
+            element.textContent = end;
+        }
+    }
+
+    requestAnimationFrame(updateNumber);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    incrementNumber("freelancing-projects", 0, 25, 10000);
+    incrementNumber("happy-clients", 0, 50, 10000);
+    incrementNumber("years-experience", 0, 10, 10000);
+});
